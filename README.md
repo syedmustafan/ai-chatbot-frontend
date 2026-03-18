@@ -35,6 +35,8 @@ VITE_API_URL=http://localhost:8000
 
 If unset, the app uses `http://localhost:8000` as the API base URL.
 
+**Leads page (production):** set **`VITE_LEADS_API_KEY`** in Vercel (same value as backend **`LEADS_API_KEY`** / GitHub secret on the backend repo). Without it, the app won’t send `X-API-Key` and the leads API will reject requests. See backend [DEPLOY_GCP.md](https://github.com/syedmustafan/ai-chatbot-backend/blob/main/DEPLOY_GCP.md).
+
 ## Scripts
 
 | Command    | Description                |
