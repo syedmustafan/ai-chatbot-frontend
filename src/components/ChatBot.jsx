@@ -6,7 +6,7 @@ import ChatInput from './ChatInput';
 
 const initialMessage = {
   id: 1,
-  text: 'Hello! How can I help you today?',
+  text: "Hi — I'm here to help book your move. We’ll grab a few details (name, contact, and what you need). What should I call you?",
   sender: 'ai',
   timestamp: new Date(),
 };
@@ -16,6 +16,7 @@ export default function ChatBot() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [conversationId, setConversationId] = useState(null);
+  const [intakeComplete, setIntakeComplete] = useState(false);
 
   const handleSend = useCallback(async (text) => {
     if (!text.trim()) return;
@@ -33,6 +34,7 @@ export default function ChatBot() {
       const data = await sendMessage(text.trim(), conversationId);
       if (data.success && data.response != null) {
         setConversationId(data.conversation_id || null);
+        if (data.lead_status === 'complete') setIntakeComplete(true);
         const aiMsg = {
           id: Date.now() + 1,
           text: data.response,
@@ -55,6 +57,7 @@ export default function ChatBot() {
     setMessages([initialMessage]);
     setConversationId(null);
     setError(null);
+    setIntakeComplete(false);
   }, []);
 
   return (
@@ -66,8 +69,14 @@ export default function ChatBot() {
       {/* Ambient glow behind the card */}
       <div className="absolute -inset-[1px] bg-gradient-to-br from-cyber-green/10 to-cyber-green-dark/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
       
-      <ChatHeader title="AI Assistant" onClose={undefined} />
-      
+      <ChatHeader title="Move booking" onClose={undefined} />
+
+      {intakeComplete && (
+        <div className="px-5 py-2 bg-cyber-green/10 border-b border-cyber-green/30 text-cyber-green text-sm text-center">
+          Your details are saved. We&apos;ll be in touch.
+        </div>
+      )}
+
       {error && (
         <div className="px-5 py-3 bg-red-900/30 border-b border-red-800/50 text-red-300 text-sm flex items-center justify-between backdrop-blur-sm animate-in slide-in-from-top-2 duration-300">
           <div className="flex items-center gap-3">
