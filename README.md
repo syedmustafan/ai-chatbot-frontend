@@ -6,13 +6,17 @@ React + Vite frontend for the AI Chatbot. Uses Tailwind CSS and talks to the Dja
 
 ## CI/CD (Vercel)
 
-Pushes to **`main`** run [`.github/workflows/deploy-vercel.yml`](.github/workflows/deploy-vercel.yml) and deploy to **https://frontend-two-hazel-29.vercel.app**.
+Pushes to **`main`** run [`.github/workflows/deploy-vercel.yml`](.github/workflows/deploy-vercel.yml) and deploy to **https://ai-chatbot-frontend-nu.vercel.app**.
 
 1. GitHub repo → **Settings → Secrets and variables → Actions → New repository secret**
 2. Name: **`VERCEL_TOKEN`**
-3. Value: create a token at **[vercel.com/account/tokens](https://vercel.com/account/tokens)** (scope: full account or the team that owns the `frontend` project).
+3. Value: create a token at **[vercel.com/account/tokens](https://vercel.com/account/tokens)** (scope: full account or the team that owns the `ai-chatbot-frontend` project).
 
-Until `VERCEL_TOKEN` is set, the workflow will fail on deploy.
+Also add:
+- `VERCEL_ORG_ID`
+- `VERCEL_PROJECT_ID`
+
+Until these Vercel secrets are set, the workflow will fail on deploy.
 
 ## Prerequisites
 
