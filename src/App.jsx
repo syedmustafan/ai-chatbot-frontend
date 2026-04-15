@@ -1,6 +1,8 @@
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import ChatBot from './components/ChatBot';
+import AssistantChat from './components/AssistantChat';
 import Leads from './pages/Leads';
+import LindyChat from './pages/LindyChat';
 
 function Layout({ children }) {
   const { pathname } = useLocation();
@@ -42,6 +44,26 @@ function Layout({ children }) {
         >
           Leads
         </Link>
+        <Link
+          to="/assistant"
+          className={`px-3 py-1.5 rounded-lg border transition-colors ${
+            pathname === '/assistant'
+              ? 'border-cyber-green text-cyber-green bg-cyber-green/10'
+              : 'border-white/10 text-gray-400 hover:border-cyber-green/40 hover:text-cyber-green'
+          }`}
+        >
+          AI Assistant
+        </Link>
+        <Link
+          to="/lindy"
+          className={`px-3 py-1.5 rounded-lg border transition-colors ${
+            pathname === '/lindy'
+              ? 'border-cyber-green text-cyber-green bg-cyber-green/10'
+              : 'border-white/10 text-gray-400 hover:border-cyber-green/40 hover:text-cyber-green'
+          }`}
+        >
+          Lindy AI
+        </Link>
       </nav>
       <div className="relative z-10">{children}</div>
     </div>
@@ -53,7 +75,9 @@ export default function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<ChatBot />} />
+        <Route path="/assistant" element={<AssistantChat />} />
         <Route path="/leads" element={<Leads />} />
+        <Route path="/lindy" element={<LindyChat />} />
       </Routes>
     </Layout>
   );
