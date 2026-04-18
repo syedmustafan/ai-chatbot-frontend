@@ -3,6 +3,9 @@ import ChatBot from './components/ChatBot';
 import AssistantChat from './components/AssistantChat';
 import Leads from './pages/Leads';
 import LindyChat from './pages/LindyChat';
+import DocForgeHome from './pages/docforge/DocForgeHome';
+import DocForgeValidate from './pages/docforge/Validate';
+import DocForgeDownload from './pages/docforge/Download';
 
 function Layout({ children }) {
   const { pathname } = useLocation();
@@ -64,6 +67,16 @@ function Layout({ children }) {
         >
           Lindy AI
         </Link>
+        <Link
+          to="/docforge"
+          className={`px-3 py-1.5 rounded-lg border transition-colors ${
+            pathname.startsWith('/docforge')
+              ? 'border-cyber-green text-cyber-green bg-cyber-green/10'
+              : 'border-white/10 text-gray-400 hover:border-cyber-green/40 hover:text-cyber-green'
+          }`}
+        >
+          DocForge
+        </Link>
       </nav>
       <div className="relative z-10">{children}</div>
     </div>
@@ -78,6 +91,9 @@ export default function App() {
         <Route path="/assistant" element={<AssistantChat />} />
         <Route path="/leads" element={<Leads />} />
         <Route path="/lindy" element={<LindyChat />} />
+        <Route path="/docforge" element={<DocForgeHome />} />
+        <Route path="/docforge/sessions/:id/validate" element={<DocForgeValidate />} />
+        <Route path="/docforge/sessions/:id/download" element={<DocForgeDownload />} />
       </Routes>
     </Layout>
   );
